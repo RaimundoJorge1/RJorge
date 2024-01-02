@@ -8,8 +8,8 @@ import sqlalchemy
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '29cecf8afd6176f06bb3f55472d490d1'
-if os.getenv(DATABASE_PRIVATE_URL):
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(DATABASE_PRIVATE_URL)
+if os.getenv('DATABASE_PRIVATE_URL'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_PRIVATE_URL')
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
 
@@ -23,7 +23,7 @@ login_manager.login_message = "Favor se logar para ter acesso a página"
 from comunidadeimpressionadora import models
 engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 inspector = sqlalchemy.inspect(engine)
-if not inspector.has_table(usuario):
+if not inspector.has_table('usuario'):
     with app.app_context():
         database.drop_all()
         database.create_all()
